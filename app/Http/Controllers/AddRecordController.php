@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Record; // Assuming your model for records is named Record
+use App\Models\Record;
+use App\Models\Court; // Include the Court model
 
 class AddRecordController extends Controller
 {
@@ -14,7 +15,11 @@ class AddRecordController extends Controller
      */
     public function create()
     {
-        return view('add-record.create');
+        // Retrieve all courts to populate the dropdown
+        $courts = Court::all();
+
+        // Return the view with the $courts variable
+        return view('add-record', compact('courts'));
     }
 
     /**
@@ -25,31 +30,19 @@ class AddRecordController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the request data
+        // Validate the incoming request data
         $request->validate([
-            'serial_number' => 'required|string',
-            'date_received' => 'required|date',
-            'case_number' => 'required|string',
-            'class' => 'required|string',
-            'file' => 'required|string',
-            'date_of_settlement' => 'required|date',
-            'comments' => 'nullable|string',
+            'court_id' => 'required|exists:courts,id',
+            // Add your validation rules here
         ]);
 
-        // Create a new record instance
-        $record = new Record(); //to do
-        $record->serial_number = $request->serial_number;
-        $record->date_received = $request->date_received;
-        $record->case_number = $request->case_number;
-        $record->class = $request->class;
-        $record->file = $request->file;
-        $record->date_of_settlement = $request->date_of_settlement;
-        $record->comments = $request->comments;
-        
-        // Save the record
-        $record->save();
+        // Create a new record with the provided data
+        Record::create([
+            'court_id' => $request->court_id,
+            
+        ]); 
 
-        // Redirect back to the form with a success message
-        return redirect()->route('add-record.create')->with('success', 'Record added successfully.');
+        // Redirect back with success message
+        return redirect()->route('add-record')->with('success', 'Record added successfully.');
     }
 }

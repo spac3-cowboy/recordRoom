@@ -5,8 +5,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\RecordController;
+use App\Http\Controllers\AddRecordController;
 use App\Http\Controllers\CourtController;
+
 
 // Non-authenticated routes
 Route::get('/', function () {
@@ -22,8 +23,17 @@ Route::middleware(['auth'])->group(function () {
     // Add more authenticated routes here
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/all-records', [RecordController::class, 'index'])->name('all-records');
-    Route::get('/add-record', [RecordController::class, 'create'])->name('add-record');
+    Route::get('/add-record', [AddRecordController::class, 'create'])->name('add-record');
     Route::get('/add-court', [CourtController::class, 'create'])->name('add-court');
+
+    Route::get('/add-court', [CourtController::class, 'create'])->name('add-court');
+    Route::post('/add-court', [CourtController::class, 'store'])->name('courts.store');
+
+
+Route::get('/add-record', [AddRecordController::class, 'create'])->name('add-record');
+Route::post('/add-record', [AddRecordController::class, 'store'])->name('records.store');
+
+    
 });
 
 // Login routes

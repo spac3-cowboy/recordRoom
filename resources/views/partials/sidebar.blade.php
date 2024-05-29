@@ -12,9 +12,9 @@
                     All Records
                 </a>
                 <a class="nav-link" href="{{ route('add-record') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
-                    Add Record
-                </a>
+    <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
+    Add Record
+</a>
                 <a class="nav-link" href="{{ route('add-court') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
                     Add Court
