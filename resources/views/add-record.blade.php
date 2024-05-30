@@ -43,10 +43,26 @@
         <input type="text" id="serial_number" name="serial_number"><br><br>
     </div>
 
-    <div>
-        <label for="date_of_receiving">Date of Receiving:</label><br>
-        <input type="date" id="date_of_receiving" name="date_of_receiving"><br><br>
-    </div>
+    <!-- Date of Receiving -->
+<div>
+    <label for="date_of_receiving">Date of Receiving:</label><br>
+    <select name="receiving_day" id="receiving_day">
+        @for ($i = 1; $i <= 31; $i++)
+            <option value="{{ $i }}">{{ $i }}</option>
+        @endfor
+    </select>
+    <select name="receiving_month" id="receiving_month">
+        @for ($i = 1; $i <= 12; $i++)
+            <option value="{{ $i }}">{{ date("F", mktime(0, 0, 0, $i, 10)) }}</option>
+        @endfor
+    </select>
+    <select name="receiving_year" id="receiving_year">
+        @for ($i = date('Y'); $i >= date('Y') - 100; $i--)
+            <option value="{{ $i }}">{{ $i }}</option>
+        @endfor
+    </select>
+</div>
+
 
     <div>
         <label for="case_number">Case Number:</label><br>
@@ -63,10 +79,26 @@
             <input type="text" id="file" name="file"><br><br> <!-- Changed to text input -->
         </div>
 
-    <div>
-        <label for="date_of_settlement">Date of Settlement:</label><br>
-        <input type="date" id="date_of_settlement" name="date_of_settlement"><br><br>
-    </div>
+        <!-- Date of Settlement -->
+        <div>
+    <label for="date_settlement">Date of Settlement:</label><br>
+    <select name="settlement_day" id="settlement_day">
+        @for ($i = 1; $i <= 31; $i++)
+            <option value="{{ $i }}">{{ $i }}</option>
+        @endfor
+    </select>
+    <select name="settlement_month" id="settlement_month">
+        @for ($i = 1; $i <= 12; $i++)
+            <option value="{{ $i }}">{{ date("F", mktime(0, 0, 0, $i, 10)) }}</option>
+        @endfor
+    </select>
+    <select name="settlement_year" id="settlement_year">
+        @for ($i = date('Y'); $i >= date('Y') - 100; $i--)
+            <option value="{{ $i }}">{{ $i }}</option>
+        @endfor
+    </select>
+</div>
+
 
     <div>
         <label for="comments">Comments:</label><br>

@@ -25,11 +25,29 @@ class Record extends Model
         // Define the fields that are allowed to be mass assignable
         'court_id',
         'serial_number',
-        'date_of_receiving',
+        'date_received',
         'case_number',
         'class',
         'file',
-        'date_of_settlement',
+        'date_settlement',
         'comments',
     ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'date_received',
+        'date_settlement',
+    ];
+
+    /**
+     * Get the court that owns the record.
+     */
+    public function court()
+    {
+        return $this->belongsTo('App\Models\Court', 'court_id');
+    }
 }

@@ -7,7 +7,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AddRecordController;
 use App\Http\Controllers\CourtController;
-
+use App\Http\Controllers\RecordController;
+use App\Http\Controllers\SearchController;
 
 // Non-authenticated routes
 Route::get('/', function () {
@@ -19,21 +20,14 @@ Auth::routes(['register' => false, 'reset' => false]);
 
 // Authenticated routes
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
-    // Add more authenticated routes here
+    Route::get('/home', [DashboardController::class, 'index'])->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/all-records', [RecordController::class, 'index'])->name('all-records');
     Route::get('/add-record', [AddRecordController::class, 'create'])->name('add-record');
-    Route::get('/add-court', [CourtController::class, 'create'])->name('add-court');
-
+    Route::post('/add-record', [AddRecordController::class, 'store'])->name('records.store');
     Route::get('/add-court', [CourtController::class, 'create'])->name('add-court');
     Route::post('/add-court', [CourtController::class, 'store'])->name('courts.store');
-
-
-Route::get('/add-record', [AddRecordController::class, 'create'])->name('add-record');
-Route::post('/add-record', [AddRecordController::class, 'store'])->name('records.store');
-
-    
+    Route::get('/search', 'App\Http\Controllers\SearchController@search');
 });
 
 // Login routes

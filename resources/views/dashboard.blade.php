@@ -29,7 +29,9 @@
                                     <i class="fas fa-chart-area me-1"></i>
                                     Total Records
                                 </div>
-                                <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas>
+                                <h1>{{ \App\Models\Record::count() }}</h1>
+                            </div>
                             </div>
                         </div>
                         <div class="col-xl-6">
@@ -38,11 +40,67 @@
                                     <i class="fas fa-chart-bar me-1"></i>
                                     Total Courts
                                 </div>
-                                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas>
+                                <h1>{{ \App\Models\Court::count() }}</h1>
+                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="container-fluid px-4">
+    <form action="/search" method="GET">
+        <div class="form-group">
+            <label for="court">Select Court:</label>
+            <select class="form-control" id="court" name="court">
+            @foreach ($courts as $court)
+            <option value="{{ $court->id }}">{{ $court->name }}</option>
+            @endforeach
+            ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="case_number">Case Number:</label>
+            <input type="text" class="form-control" id="case_number" name="case_number">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+@if (isset($records))
+    <div class="card">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Court</th>
+                        <th>Serial Number</th>
+                        <th>Date of Receiving</th>
+                        <th>Case Number</th>
+                        <th>Class</th>
+                        <th>File</th>
+                        <th>Date of Settlement</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($records as $record)
+                        <tr>
+                            <td>{{ $record->court->name }}</td>
+                            <td>{{ $record->serial_number }}</td>
+                            <td>{{ \Carbon\Carbon::parse($record->date_received)->format('F j, Y') }}</td>
+                            <td>{{ $record->case_number }}</td>
+                            <td>{{ $record->class }}</td>
+                            <td>{{ $record->file }}</td>
+                            <td>{{ \Carbon\Carbon::parse($record->date_settlement)->format('F j, Y') }}</td>
+                            <td>{{ $record->comments }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+@endif
             </main>
             @include('partials.footer')
 </body>
