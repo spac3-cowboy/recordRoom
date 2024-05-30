@@ -20,38 +20,13 @@
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Dashboard</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Dashboard</li>
+                        <li class="breadcrumb-item active">ড্যাশবোর্ড</li>
                     </ol>
                     <div class="row">
-                        <div class="col-xl-6">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-chart-area me-1"></i>
-                                    Total Records
-                                </div>
-                                <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas>
-                                <h1>{{ \App\Models\Record::count() }}</h1>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-chart-bar me-1"></i>
-                                    Total Courts
-                                </div>
-                                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas>
-                                <h1>{{ \App\Models\Court::count() }}</h1>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container-fluid px-4">
-    <form action="/search" method="GET">
+                        <div class="col-md-12">
+                        <form action="/search" method="GET">
         <div class="form-group">
-            <label for="court">Select Court:</label>
+            <label for="court">আদালত নির্বাচন করুন:</label>
             <select class="form-control" id="court" name="court">
             @foreach ($courts as $court)
             <option value="{{ $court->id }}">{{ $court->name }}</option>
@@ -60,12 +35,19 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="case_number">Case Number:</label>
+            <label for="case_number">মোকদ্দমা নং:</label>
             <input type="text" class="form-control" id="case_number" name="case_number">
         </div>
-        <button type="submit" class="btn btn-primary">Search</button>
-    </form>
+        <br> <br>
+        <div class="text-center">
+    <button type="submit" class="btn btn-primary">Search</button>
 </div>
+    </form>
+                    </div>
+                </div>
+
+                <br>
+
 
 @if (isset($records))
     <div class="card">
@@ -101,6 +83,8 @@
         </div>
     </div>
 @endif
+
+</div>
             </main>
             @include('partials.footer')
 </body>
