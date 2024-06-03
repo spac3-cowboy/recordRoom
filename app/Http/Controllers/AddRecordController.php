@@ -18,7 +18,8 @@ class AddRecordController extends Controller
     {
         $request->validate([
             'court_id' => 'required|exists:courts,id',
-            // Add your validation rules here
+            'rr_number' => 'required', // Add validation rule for rr_number
+            // Add your other validation rules here
         ]);
 
         // Combine the date of receiving fields into a single date string
@@ -30,6 +31,7 @@ class AddRecordController extends Controller
         // Create a new record with the provided data
         $record = new Record();
         $record->court_id = $request->input('court_id');
+        $record->rr_number = $request->input('rr_number'); // Set rr_number
         $record->serial_number = $request->input('serial_number');
         $record->date_received = date('Y-m-d', strtotime($receiving_date));
         $record->case_number = $request->input('case_number');

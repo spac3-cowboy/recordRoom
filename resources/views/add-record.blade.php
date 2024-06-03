@@ -42,7 +42,7 @@
             </div>
             <!-- Date of Receiving -->
             <div>
-               <label for="date_of_receiving">নথি গ্রহনের তারিখ:</label><br>
+               <label for="date_of_receiving">নথি গ্রহণের তারিখ:</label><br>
                <select name="receiving_day" id="receiving_day">
                   @for ($i = 1; $i <= 31; $i++)
                   <option value="{{ $i }}">{{ $i }}</option>
@@ -64,7 +64,7 @@
                <input type="text" id="case_number" name="case_number"><br><br>
             </div>
             <div>
-               <label for="class">শ্রেনি:</label><br>
+               <label for="class">শ্রেণি:</label><br>
                <input type="text" id="class" name="class"><br><br>
             </div>
             <div>
@@ -91,9 +91,14 @@
                </select>
             </div>
             <div>
-               <label for="comments">মন্তব্য:</label><br>
-               <textarea id="comments" name="comments" rows="4" cols="50"></textarea><br><br>
-            </div>
+    <label for="rr_number">RR নম্বর:</label><br>
+    <input type="text" id="rr_number" name="rr_number" /><br><br>
+</div>
+            <div>
+    <label for="comments">মন্তব্য:</label><br>
+    <textarea id="comments" name="comments" rows="4" cols="50"><?php echo isset($comments) && !empty($comments) ? $comments : '-'; ?>
+    </textarea><br><br>
+</div>
             <button type="submit">Add Record</button>
          </form>
       </div>

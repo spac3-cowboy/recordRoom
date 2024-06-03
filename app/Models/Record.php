@@ -24,6 +24,7 @@ class Record extends Model
     protected $fillable = [
         // Define the fields that are allowed to be mass assignable
         'court_id',
+        'rr_number', // Add rr_number to the fillable array
         'serial_number',
         'date_received',
         'case_number',

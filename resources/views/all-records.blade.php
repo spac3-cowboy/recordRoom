@@ -27,9 +27,10 @@
                      <th>ক্রমিক নং</th>
                      <th>নথি গ্রহণের তারিখ</th>
                      <th>মোকদ্দমা নম্বর</th>
-                     <th>শ্রেনি</th>
+                     <th>শ্রেণি</th>
                      <th>ফাইল</th>
                      <th>নিষ্পত্তির তারিখ</th>
+                     <th>RR নম্বর</th>
                      <th>মন্তব্য</th>
                   </tr>
                </thead>
@@ -43,6 +44,7 @@
                      <td>{{ $record->class }}</td>
                      <td>{{ $record->file }}</td>
                      <td>{{ \Carbon\Carbon::parse($record->date_settlement)->format('F j, Y') }}</td>
+                     <td>{{ $record->rr_number }}</td>
                      <td>{{ $record->comments }}</td>
                   </tr>
                   @endforeach
